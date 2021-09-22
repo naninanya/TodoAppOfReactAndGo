@@ -9,15 +9,15 @@ const TodoItem = ({ item }: TtemsPropsType) => {
     const [clicked, setClicked] = useState<boolean>(false);
 
     const onClick = () => {
-        setClicked(true);
+        setClicked(!clicked);
     }
 
     return (
         <>
-            <li key={item.Id} >{item.Name}
-                <button type="submit" onClick={onClick}> Buy!</button>
-                {clicked && <a>test</a>}
-            </li>
+            <button className={!clicked ? "ItemButton" : "CompletedItemButton"}
+                type="submit" onClick={onClick} key={item.Id}>
+                {!clicked ? item.Name : item.Name + " Complete!"}
+            </button>
         </>
     );
 };

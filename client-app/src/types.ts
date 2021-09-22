@@ -1,3 +1,8 @@
+// type
+export type AllItemsPropsType = {
+    items: AllTodoItemsType;
+}
+
 // interface
 export interface SingleTodoItemType {
     Id: number,
