@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
-import './components/TodoItem';
-import TodoItem, { ItemType } from './components/TodoItem';
+import './components/TodoItems';
+import TodoItem from './components/TodoItems';
+import { AllTodoItemsType } from "./types"
 
 function App() {
-  const [item, setItem] = useState<ItemType>({
-    id: 0,
-    name: "",
-  });
+  const [allTodoItemsData, setAllTodoItemsData] = useState<AllTodoItemsType>([{
+    Id: 0,
+    Name: "",
+  }]);
 
   const getTodo = () => {
     fetch('http://localhost:1323/test', { mode: 'cors' })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        setItem({
-          id: data.id,
-          name: data.name,
-        })
+        setAllTodoItemsData(data)
       })
       .catch(err => {
         alert("Error occurred.")
@@ -28,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <button type="submit" onClick={getTodo} >api test</button>
-      <TodoItem item={item} />
+      <TodoItem items={allTodoItemsData} />
     </div>
   );
 }

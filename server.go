@@ -7,9 +7,9 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-type Todo struct {
-	Id   int    `json:"id,string"`
-	Name string `json:"name"`
+type TodoItem struct {
+	Id   int    `json:"Id,string"`
+	Name string `json:"Name"`
 }
 
 func main() {
@@ -35,10 +35,9 @@ func hello(c echo.Context) error {
 }
 
 func test(c echo.Context) error {
-	t := Todo{
-		Id:   1,
-		Name: "testTodo",
-	}
+	items := []TodoItem{}
+	items = append(items, TodoItem{Id: 1, Name: "test1"})
+	items = append(items, TodoItem{Id: 2, Name: "test2"})
 
-	return c.JSON(http.StatusOK, t)
+	return c.JSON(http.StatusOK, items)
 }
