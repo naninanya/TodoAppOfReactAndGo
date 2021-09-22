@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"todoApp/infrastructure"
 
 	_ "github.com/lib/pq"
 
@@ -52,41 +53,13 @@ func init() {
 	// defer db.Close()
 }
 
-type TodoItem struct {
-	Id         int    `db:"id" json:"Id"`
-	Name       string `db:"name" json:"Name"`
-	Created_at string `db:"created_at" json:"Created_at"`
-	Updated_at string `db:"updated_at" json:"Updated_at"`
-}
-
 func GetAllTodoItems() echo.HandlerFunc {
 	return func(c echo.Context) error {
 
-		item := TodoItem{}
-		items := []*TodoItem{}
-
-		rows, err := Client.Query("SELECT id, name, created_at, updated_at FROM todoitem")
+		items, err := infrastructure.NewTodoItemRepository().GetTodoItems(Client)
 
 		if err != nil {
-			return errors.Wrapf(err, "Cannot execute sql.")
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			if err := rows.Scan(
-				&item.Id,
-				&item.Name,
-				&item.Created_at,
-				&item.Updated_at); err != nil {
-				return errors.Wrapf(err, "Cannot scan to item.")
-			}
-
-			items = append(items, &TodoItem{
-				Id:         item.Id,
-				Name:       item.Name,
-				Created_at: item.Created_at,
-				Updated_at: item.Created_at,
-			})
+			return errors.Wrapf(err, "Cannot get todo items.")
 		}
 
 		return c.JSON(http.StatusOK, items)
