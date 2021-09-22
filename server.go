@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"todoApp/handler"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -24,9 +25,11 @@ func main() {
 	// Routes
 	e.GET("/", hello)
 	e.GET("/test", test)
+	e.GET("/api", handler.GetAllTodoItems())
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	// If you want to check from iphone, you change to :1323.
+	e.Logger.Fatal(e.Start("localhost:1323"))
 }
 
 // Handler
