@@ -7,6 +7,7 @@ import TodoItem from './components/TodoItems';
 import { AllTodoItemsType } from "./types"
 
 function App() {
+  const [todoName, setTodoName] = useState<string>("");
   const [allTodoItemsData, setAllTodoItemsData] = useState<AllTodoItemsType>([]);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
     <div className="App">
       <Title />
       <TodoItem items={allTodoItemsData} />
-      <Form />
+      <Form todoName={todoName} setTodoName={setTodoName} />
     </div>
   );
 }

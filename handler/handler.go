@@ -65,3 +65,17 @@ func GetAllTodoItems() echo.HandlerFunc {
 		return c.JSON(http.StatusOK, items)
 	}
 }
+
+func Insert() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		name := c.Param("name")
+
+		err := infrastructure.NewTodoItemRepository().Insert(Client, name)
+
+		if err != nil {
+			return errors.Wrapf(err, "Cannot")
+		}
+
+		return c.String(http.StatusOK, "OK")
+	}
+}

@@ -20,6 +20,7 @@ func main() {
 	// Routes
 	e.GET("/", hello)
 	e.GET("/api/todo", handler.GetAllTodoItems())
+	e.POST("/api/save/:name", handler.Insert())
 
 	// Start server
 	// If you want to check from iphone, you change to :1323.
@@ -30,3 +31,10 @@ func main() {
 func hello(c echo.Context) error {
 	return c.String(http.StatusOK, "Hello, World!")
 }
+
+// func test(c echo.Context) error {
+// 	log.Println("test1")
+// 	// name := c.Param("name")
+// 	name := "test"
+// 	return c.Render(http.StatusOK, "name is ", name)
+// }

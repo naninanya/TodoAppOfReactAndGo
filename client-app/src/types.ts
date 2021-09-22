@@ -1,3 +1,5 @@
+import React from "react"
+
 // type
 export type ItemsPropsType = {
     item: SingleTodoItemType;
@@ -5,6 +7,11 @@ export type ItemsPropsType = {
 
 export type AllItemsPropsType = {
     items: AllTodoItemsType;
+}
+
+export type FormPropsType = {
+    todoName: string;
+    setTodoName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // interface
