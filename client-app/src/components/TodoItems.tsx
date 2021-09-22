@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { AllTodoItemsType } from "../types";
 import DeleteButton from "./DeleteButton";
+import TodoItem from "./TodoItem";
 
 type AllItemsPropsType = {
     items: AllTodoItemsType;
@@ -7,9 +9,9 @@ type AllItemsPropsType = {
 
 const TodoItems = ({ items }: AllItemsPropsType) => {
     return (
-        <ul>
+        <ul className="TodoItems-list">
             {items.map((item) =>
-                <li key={item.Id}>{item.Name}</li>)}
+                <TodoItem item={item} />)}
         </ul>
     );
 };

@@ -1,5 +1,5 @@
 // interface
-interface SingleTodoItemType {
+export interface SingleTodoItemType {
     Id: number,
     Name: string,
 }

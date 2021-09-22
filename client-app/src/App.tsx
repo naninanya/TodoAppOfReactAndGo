@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Title from './components/TItle';
 import './components/TodoItems';
 import TodoItem from './components/TodoItems';
 import { AllTodoItemsType } from "./types"
@@ -10,7 +11,7 @@ function App() {
     Name: "",
   }]);
 
-  const getTodo = () => {
+  useEffect(() => {
     fetch('http://localhost:1323/test', { mode: 'cors' })
       .then(res => res.json())
       .then(data => {
@@ -20,11 +21,11 @@ function App() {
         alert("Error occurred.")
         console.log(err)
       })
-  }
+  }, [])
 
   return (
     <div className="App">
-      <button type="submit" onClick={getTodo} >api test</button>
+      <Title />
       <TodoItem items={allTodoItemsData} />
     </div>
   );

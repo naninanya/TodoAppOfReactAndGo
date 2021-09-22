@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,11 +17,22 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* TodoItems.js */
+
+.TodoItems-list {
+  padding: 0;
+  position: relative;
+  color: #2d8fdd;
+  /*背景色*/
+  background: #f1f8ff;
+  /*下のバーとの余白*/
+  margin-bottom: 3px;
+  line-height: 1.5;
+  padding: 0.5em;
+  /*ポチ消す*/
+  list-style-type: none!important;
+}
+
+li:hover {
+  background-color: rgb(61, 214, 214)
 }
