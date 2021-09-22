@@ -11,6 +11,8 @@ export type AllItemsPropsType = {
 export interface SingleTodoItemType {
     Id: number,
     Name: string,
+    Created_at: string,
+    Updated_at: string,
 }
 
 export interface AllTodoItemsType extends Array<SingleTodoItemType> { }

@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     // If you want to check from iphone, you change localhost to your pc address.
-    fetch('http://localhost:1323/test', { mode: 'cors' })
+    fetch('http://localhost:1323/api/todo', { mode: 'cors' })
       .then(res => res.json())
       .then(data => {
         setAllTodoItemsData(data)
