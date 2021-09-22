@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { SingleTodoItemType } from "../types";
+import { ItemsPropsType } from "../types";
 
-type TtemsPropsType = {
-    item: SingleTodoItemType;
-}
-
-const TodoItem = ({ item }: TtemsPropsType) => {
+const TodoItem = ({ item }: ItemsPropsType) => {
     const [clicked, setClicked] = useState<boolean>(false);
 
     const onClick = () => {

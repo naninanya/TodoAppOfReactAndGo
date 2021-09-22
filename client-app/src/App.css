@@ -17,22 +17,6 @@
   color: #61dafb;
 }
 
-/* TodoItems.js */
-
-.TodoItems-list {
-  padding: 0;
-  position: relative;
-  color: #2d8fdd;
-  /*背景色*/
-  background: #f1f8ff;
-  /*下のバーとの余白*/
-  margin-bottom: 3px;
-  line-height: 1.5;
-  padding: 0.5em;
-  /*ポチ消す*/
-  list-style-type: none!important;
-}
-
 /* TodoItem.js */
 
 .ItemButton {
@@ -40,25 +24,26 @@
   padding: 0;
   position: relative;
   color: #fff;
-  background-color: #2d8fdd;
+  background-color: #90AFC5;
   border: 0px;
   margin-bottom: 3px;
-  line-height: 1.5;
   padding: 0.5em;
   font-size: 25px;
 }
 
-.ItemButton:hover {
+/* todo pc and iphpne */
+
+/* .ItemButton:hover {
   color: #fff;
   background-color: #5d4a3c;
-}
+} */
 
 .CompletedItemButton {
   width: 95%;
   padding: 0;
   position: relative;
   color: #fff;
-  background-color: #5d4a3c;
+  background-color: #336B87;
   border: 0px;
   margin-bottom: 3px;
   line-height: 1.5;
@@ -66,6 +51,31 @@
   font-size: 25px;
 }
 
-li:hover {
-  background-color: rgb(61, 214, 214)
+/* Form.js */
+
+.AddTodoInput {
+  width: 50%;
+  margin-top: 100px;
+  margin-bottom: 3px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 25px;
+  color: #2A3132;
+}
+
+.AddTodoInput:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #90AFC5;
+}
+
+.AddTodoButton {
+  width: 50%;
+  margin-top: 3px;
+  font-size: 25px;
+  color: #fff;
+  background-color: #2A3132;
 }

@@ -1,4 +1,8 @@
 // type
+export type ItemsPropsType = {
+    item: SingleTodoItemType;
+}
+
 export type AllItemsPropsType = {
     items: AllTodoItemsType;
 }
