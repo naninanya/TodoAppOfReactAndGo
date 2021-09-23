@@ -70,13 +70,13 @@ func Insert() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		name := c.Param("name")
 
-		err := infrastructure.NewTodoItemRepository().Insert(Client, name)
+		lastInsertId, err := infrastructure.NewTodoItemRepository().Insert(Client, name)
 
 		if err != nil {
 			return errors.Wrapf(err, "Cannot insert.")
 		}
 
-		return c.String(http.StatusOK, "Complete insert.")
+		return c.JSON(http.StatusOK, lastInsertId)
 	}
 }
 

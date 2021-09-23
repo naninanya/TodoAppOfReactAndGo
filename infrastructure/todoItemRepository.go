@@ -45,14 +45,18 @@ func (tip *TodoItemPersistence) GetTodoItems(DB *sql.DB) ([]*domain.TodoItem, er
 	return items, nil
 }
 
-func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) error {
+func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int64, error) {
 	stmt, err := DB.Prepare("Insert Into todoitem(name, created_at, updated_at) values($1, current_timestamp, current_timestamp)")
 	if err != nil {
-		return err
+		return -1, err
 	}
 
-	_, err = stmt.Exec(name)
-	return err
+	result, err := stmt.Exec(name)
+	if err != nil {
+		return -1, err
+	}
+
+	return result.LastInsertId()
 }
 
 func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []string) error {
