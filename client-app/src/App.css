@@ -46,7 +46,6 @@
   background-color: #336B87;
   border: 0px;
   margin-bottom: 3px;
-  line-height: 1.5;
   padding: 0.5em;
   font-size: 25px;
 }
@@ -55,7 +54,7 @@
 
 .AddTodoInput {
   width: 50%;
-  margin-top: 100px;
+  margin-top: 20px;
   margin-bottom: 3px;
   border-radius: 4px;
   border: none;
@@ -78,4 +77,15 @@
   font-size: 25px;
   color: #fff;
   background-color: #2A3132;
+}
+
+/* DeleteButton.js */
+
+.DeleteButton {
+  width: 50%;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: #fff;
+  background-color: #763626;
 }
