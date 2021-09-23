@@ -67,7 +67,7 @@ func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int, error) {
 }
 
 func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []string) error {
-	stmt, err := DB.Prepare("Delete todoitem where id = Any(string_to_array($1,','))")
+	stmt, err := DB.Prepare("Delete From todoitem where id = Any(string_to_array($1,','))")
 
 	if err != nil {
 		return err

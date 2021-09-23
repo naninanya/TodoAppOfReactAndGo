@@ -1,6 +1,8 @@
 const DeleteButton = () => {
     return (
-        <button type="submit"> Del</button>
+        <button className="DeleteButton" type="submit">
+            Clear completed Todo items
+        </button>
     );
 };
 

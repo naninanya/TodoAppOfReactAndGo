@@ -34,12 +34,21 @@ function App() {
     ))
   }
 
+  const addNewItem = (newId: number, name: string) => {
+    const newItem: SingleTodoItemType = {
+      Id: newId,
+      Name: name,
+      isCompleted: false,
+    };
+    setAllTodoItemsData(allTodoItemsData.concat(newItem))
+  }
+
   return (
     <div className="App">
       <Title />
       <DeleteButton />
       <TodoItem items={allTodoItemsData} setCompleted={setCompleted} />
-      <Form />
+      <Form addNewItem={addNewItem} />
     </div>
   );
 }
