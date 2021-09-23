@@ -73,9 +73,18 @@ func Insert() echo.HandlerFunc {
 		err := infrastructure.NewTodoItemRepository().Insert(Client, name)
 
 		if err != nil {
-			return errors.Wrapf(err, "Cannot")
+			return errors.Wrapf(err, "Cannot insert.")
 		}
 
-		return c.String(http.StatusOK, "OK")
+		return c.String(http.StatusOK, "Complete insert.")
 	}
+}
+
+func Delete() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// todo convert body json
+
+		return c.String(http.StatusOK, "Complete delete.")
+	}
+
 }

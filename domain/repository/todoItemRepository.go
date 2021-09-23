@@ -6,6 +6,7 @@ import (
 )
 
 type TodoItemRepository interface {
-	Insert(DB *sql.DB, name string) error
 	GetTodoItems(DB *sql.DB) ([]*domain.TodoItem, error)
+	Insert(DB *sql.DB, name string) error
+	Delete(DB *sql.DB, ids []string) error
 }

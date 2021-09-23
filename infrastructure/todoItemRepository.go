@@ -30,7 +30,7 @@ func (tip *TodoItemPersistence) GetTodoItems(DB *sql.DB) ([]*domain.TodoItem, er
 			&item.Name,
 			&item.Created_at,
 			&item.Updated_at); err != nil {
-			// return errors.Wrapf(err, "Cannot scan to item.")w
+			// return errors.Wrapf(err, "Cannot scan to item.")
 			return nil, err
 		}
 
@@ -52,6 +52,16 @@ func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) error {
 	}
 
 	_, err = stmt.Exec(name)
+	return err
+}
 
+func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []string) error {
+	stmt, err := DB.Prepare("Delete todoitem where id = Any(string_to_array($1,','))")
+
+	if err != nil {
+		return err
+	}
+
+	_, err = stmt.Exec(ids)
 	return err
 }
