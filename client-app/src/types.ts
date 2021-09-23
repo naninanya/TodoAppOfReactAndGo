@@ -1,17 +1,12 @@
-import React from "react"
-
 // type
 export type ItemsPropsType = {
     item: SingleTodoItemType;
+    setCompleted: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export type AllItemsPropsType = {
     items: AllTodoItemsType;
-}
-
-export type FormPropsType = {
-    todoName: string;
-    setTodoName: React.Dispatch<React.SetStateAction<string>>;
+    setCompleted: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 // interface
@@ -20,6 +15,7 @@ export interface SingleTodoItemType {
     Name: string,
     Created_at: string,
     Updated_at: string,
+    isCompleted: boolean,
 }
 
 export interface AllTodoItemsType extends Array<SingleTodoItemType> { }

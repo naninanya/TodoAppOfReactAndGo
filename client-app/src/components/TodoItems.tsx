@@ -1,10 +1,10 @@
 import { AllItemsPropsType } from "../types";
 import TodoItem from "./TodoItem";
 
-const TodoItems = ({ items }: AllItemsPropsType) => {
+const TodoItems = ({ items, setCompleted }: AllItemsPropsType) => {
     return (
         <>
-            {items.map((item) => <TodoItem item={item} />)}
+            {items.map((item) => <TodoItem item={item} setCompleted={setCompleted} />)}
         </>
     );
 };

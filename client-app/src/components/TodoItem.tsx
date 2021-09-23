@@ -1,18 +1,11 @@
-import { useState } from "react";
 import { ItemsPropsType } from "../types";
 
-const TodoItem = ({ item }: ItemsPropsType) => {
-    const [clicked, setClicked] = useState<boolean>(false);
-
-    const onClick = () => {
-        setClicked(!clicked);
-    }
-
+const TodoItem = ({ item, setCompleted }: ItemsPropsType) => {
     return (
         <>
-            <button className={!clicked ? "ItemButton" : "CompletedItemButton"}
-                type="submit" onClick={onClick} key={item.Id}>
-                {!clicked ? item.Name : item.Name + " Complete!"}
+            <button className={!item.isCompleted ? "ItemButton" : "CompletedItemButton"}
+                type="submit" onClick={setCompleted} id={item.Id.toString()}>
+                {!item.isCompleted ? item.Name : item.Name + " Complete!"}
             </button>
         </>
     );
