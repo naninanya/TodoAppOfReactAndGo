@@ -66,17 +66,21 @@ func GetAllTodoItems() echo.HandlerFunc {
 	}
 }
 
+type InsertResult struct {
+	Id int `json:"id"`
+}
+
 func Insert() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		name := c.Param("name")
-
 		lastInsertId, err := infrastructure.NewTodoItemRepository().Insert(Client, name)
 
 		if err != nil {
 			return errors.Wrapf(err, "Cannot insert.")
 		}
 
-		return c.JSON(http.StatusOK, lastInsertId)
+		r := InsertResult{Id: lastInsertId}
+		return c.JSON(http.StatusOK, r)
 	}
 }
 

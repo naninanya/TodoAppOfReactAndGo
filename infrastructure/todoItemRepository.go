@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"database/sql"
+	"strings"
 	"todoApp/domain"
 	"todoApp/domain/repository"
 )
@@ -45,18 +46,24 @@ func (tip *TodoItemPersistence) GetTodoItems(DB *sql.DB) ([]*domain.TodoItem, er
 	return items, nil
 }
 
-func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int64, error) {
-	stmt, err := DB.Prepare("Insert Into todoitem(name, created_at, updated_at) values($1, current_timestamp, current_timestamp)")
+func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int, error) {
+	// 	var id int
+	// if err := db.QueryRow("INSERT INTO table(name) VALUES("xxxx") RETURNING ID").Scan(&id); err != nil {
+	//   panic(err)
+	// }
+	var sql = [...]string{
+		"Insert Into todoitem(name, created_at, updated_at)",
+		"values($1, current_timestamp, current_timestamp)",
+		"RETURNING ID",
+	}
+	var id int
+	err := DB.QueryRow(strings.Join(sql[:], ""), name).Scan(&id)
+
 	if err != nil {
 		return -1, err
 	}
 
-	result, err := stmt.Exec(name)
-	if err != nil {
-		return -1, err
-	}
-
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []string) error {
