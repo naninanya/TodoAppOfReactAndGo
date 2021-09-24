@@ -1,6 +1,16 @@
 import { ItemsPropsType } from "../types";
 
-const TodoItem = ({ item, setCompleted }: ItemsPropsType) => {
+const TodoItem = ({ item, items, setItems }: ItemsPropsType) => {
+
+    const setCompleted = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const target = Number(e.currentTarget.id)
+        setItems(items.map((item) => {
+            if (item.Id === target)
+                item.isCompleted = !item.isCompleted;
+            return item;
+        }))
+    }
+
     return (
         <>
             <button className={!item.isCompleted ? "ItemButton" : "CompletedItemButton"}

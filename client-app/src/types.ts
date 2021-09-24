@@ -1,12 +1,13 @@
 // type
 export type ItemsPropsType = {
     item: SingleTodoItemType;
-    setCompleted: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    items: AllTodoItemsType;
+    setItems: React.Dispatch<React.SetStateAction<AllTodoItemsType>>;
 }
 
 export type AllItemsPropsType = {
     items: AllTodoItemsType;
-    setCompleted: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    setItems: React.Dispatch<React.SetStateAction<AllTodoItemsType>>;
 }
 
 export type FormPropsType = {

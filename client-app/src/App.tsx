@@ -8,7 +8,7 @@ import TodoItem from './components/TodoItems';
 import { AllTodoItemsType, SingleTodoItemType } from "./types"
 
 function App() {
-  const [allTodoItemsData, setAllTodoItemsData] = useState<AllTodoItemsType>([]);
+  const [todoItemsData, setTodoItemsData] = useState<AllTodoItemsType>([]);
 
   useEffect(() => {
     // If you want to check from iphone, you change localhost to your pc address.
@@ -16,7 +16,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         const reData = data.map((item: SingleTodoItemType) => { item.isCompleted = false; return item; })
-        setAllTodoItemsData(reData);
+        setTodoItemsData(reData);
       })
       .catch(err => {
         alert("Error occurred. " + err);
@@ -24,31 +24,17 @@ function App() {
       })
   }, [])
 
-  const setCompleted = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const target = Number(e.currentTarget.id)
-    setAllTodoItemsData(allTodoItemsData.map((item) => {
-      if (item.Id === target)
-        item.isCompleted = !item.isCompleted;
-      return item;
-    }
-    ))
-  }
-
-  const addNewItem = (newId: number, name: string) => {
-    const newItem: SingleTodoItemType = {
-      Id: newId,
-      Name: name,
-      isCompleted: false,
-    };
-    setAllTodoItemsData(allTodoItemsData.concat(newItem))
+  const RemoveCompletedItem = () => {
+    const notCompletedItem = todoItemsData.filter((item) => item.isCompleted)
+    setTodoItemsData(notCompletedItem)
   }
 
   return (
     <div className="App">
       <Title />
       <DeleteButton />
-      <TodoItem items={allTodoItemsData} setCompleted={setCompleted} />
-      <Form addNewItem={addNewItem} />
+      <TodoItem items={todoItemsData} setItems={setTodoItemsData} />
+      <Form items={todoItemsData} setItems={setTodoItemsData} />
     </div>
   );
 }

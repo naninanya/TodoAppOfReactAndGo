@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { FormPropsType } from "../types";
+import { AllItemsPropsType, SingleTodoItemType } from "../types";
 
-const Form = ({ addNewItem }: FormPropsType) => {
+const Form = ({ items, setItems }: AllItemsPropsType) => {
     const [todoName, setTodoName] = useState<string>("");
 
     const addTodoItem = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         fetch(`http://localhost:1323/api/save/${todoName}`, { method: "POST" })
             .then(res => res.json())
-            .then(data => addNewItem(data.id, todoName))
+            .then(data => {
+                const newItem: SingleTodoItemType = {
+                    Id: data.id,
+                    Name: todoName,
+                    isCompleted: false,
+                };
+                setItems(items.concat(newItem))
+            })
             .catch(err => {
                 alert("Error occurred. " + err);
                 console.log(err);
