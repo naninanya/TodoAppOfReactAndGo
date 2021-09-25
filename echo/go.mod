@@ -1,4 +1,4 @@
-module todoApp
+module todoApp/echo
 
 go 1.15
 

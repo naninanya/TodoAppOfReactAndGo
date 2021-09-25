@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"todoApp/infrastructure"
+	"todoApp/echo/infrastructure"
 
 	_ "github.com/lib/pq"
 

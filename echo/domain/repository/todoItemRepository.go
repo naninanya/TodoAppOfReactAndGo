@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"todoApp/domain"
+	"todoApp/echo/domain"
 )
 
 type TodoItemRepository interface {
