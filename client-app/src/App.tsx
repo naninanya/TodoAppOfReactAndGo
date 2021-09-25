@@ -12,7 +12,8 @@ function App() {
 
   useEffect(() => {
     // If you want to check from iphone, you change localhost to your pc address.
-    fetch('http://localhost:1323/api/todo', { mode: 'cors' })
+    const url = `http://localhost:1323/api/todo`;
+    fetch(url, { mode: 'cors' })
       .then(res => res.json())
       .then(data => {
         const reData = data.map((item: SingleTodoItemType) => { item.isCompleted = false; return item; })
@@ -24,15 +25,12 @@ function App() {
       })
   }, [])
 
-  const RemoveCompletedItem = () => {
-    const notCompletedItem = todoItemsData.filter((item) => item.isCompleted)
-    setTodoItemsData(notCompletedItem)
-  }
+
 
   return (
     <div className="App">
       <Title />
-      <DeleteButton />
+      <DeleteButton items={todoItemsData} setItems={setTodoItemsData} />
       <TodoItem items={todoItemsData} setItems={setTodoItemsData} />
       <Form items={todoItemsData} setItems={setTodoItemsData} />
     </div>

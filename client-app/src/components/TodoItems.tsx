@@ -15,7 +15,7 @@ const TodoItems = ({ items, setItems }: AllItemsPropsType) => {
         <>
             {items.map((item) =>
                 <button className={!item.isCompleted ? "ItemButton" : "CompletedItemButton"}
-                    type="submit" onClick={setCompleted} id={item.Id.toString()}>
+                    type="submit" onClick={setCompleted} id={item.Id.toString()} key={item.Id}>
                     {!item.isCompleted ? item.Name : item.Name + " Complete!"}
                 </button>
             )}

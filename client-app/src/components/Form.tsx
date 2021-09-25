@@ -6,7 +6,13 @@ const Form = ({ items, setItems }: AllItemsPropsType) => {
 
     const addTodoItem = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        fetch(`http://localhost:1323/api/save/${todoName}`, { method: "POST" })
+
+        const url = `http://localhost:1323/api/save/${todoName}`;
+        const requestOption = {
+            method: "POST",
+        };
+
+        fetch(url, requestOption)
             .then(res => res.json())
             .then(data => {
                 const newItem: SingleTodoItemType = {

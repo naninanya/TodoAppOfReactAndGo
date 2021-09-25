@@ -84,9 +84,22 @@ func Insert() echo.HandlerFunc {
 	}
 }
 
+type DeleteRequest struct {
+	CompletedId []int `json:"completedId"`
+}
+
 func Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		// todo convert body json
+		d := new(DeleteRequest)
+		if err := c.Bind(d); err != nil {
+			return errors.Wrapf(err, "Connot get json from request.")
+		}
+
+		err := infrastructure.NewTodoItemRepository().Delete(Client, d.CompletedId)
+
+		if err != nil {
+			return errors.Wrapf(err, "Connot delete.")
+		}
 
 		return c.String(http.StatusOK, "Complete delete.")
 	}

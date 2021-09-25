@@ -47,15 +47,12 @@ func (tip *TodoItemPersistence) GetTodoItems(DB *sql.DB) ([]*domain.TodoItem, er
 }
 
 func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int, error) {
-	// 	var id int
-	// if err := db.QueryRow("INSERT INTO table(name) VALUES("xxxx") RETURNING ID").Scan(&id); err != nil {
-	//   panic(err)
-	// }
 	var sql = [...]string{
 		"Insert Into todoitem(name, created_at, updated_at)",
 		"values($1, current_timestamp, current_timestamp)",
 		"RETURNING ID",
 	}
+
 	var id int
 	err := DB.QueryRow(strings.Join(sql[:], ""), name).Scan(&id)
 
@@ -66,13 +63,26 @@ func (tip *TodoItemPersistence) Insert(DB *sql.DB, name string) (int, error) {
 	return id, nil
 }
 
-func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []string) error {
-	stmt, err := DB.Prepare("Delete From todoitem where id = Any(string_to_array($1,','))")
+func (tip *TodoItemPersistence) Delete(DB *sql.DB, ids []int) error {
+	tx, err := DB.Begin()
 
-	if err != nil {
-		return err
+	//I implement uisng loop, because can not use id = any(array[1,2,3]).
+	for _, id := range ids {
+		stmt, err := DB.Prepare("Delete From todoitem where id = $1")
+
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
+
+		_, err = stmt.Exec(id)
+
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
 	}
 
-	_, err = stmt.Exec(ids)
+	tx.Commit()
 	return err
 }
