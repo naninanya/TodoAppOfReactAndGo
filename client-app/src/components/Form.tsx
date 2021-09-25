@@ -7,6 +7,10 @@ const Form = ({ items, setItems }: AllItemsPropsType) => {
     const addTodoItem = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!todoName) {
+            return
+        }
+
         const url = `http://localhost:1323/api/save/${todoName}`;
         const requestOption = {
             method: "POST",
@@ -26,6 +30,7 @@ const Form = ({ items, setItems }: AllItemsPropsType) => {
                 alert("Error occurred. " + err);
                 console.log(err);
             })
+            
         setTodoName("");
     }
 
