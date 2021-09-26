@@ -24,8 +24,8 @@ func main() {
 	e.DELETE("/api/delete", handler.Delete())
 
 	// Start server
-	// If you want to check from iphone, you change to :1323.
-	e.Logger.Fatal(e.Start("localhost:1323"))
+	// If you want to check from iphone or on Docker, you change to :1323.
+	e.Logger.Fatal(e.Start(":1323"))
 }
 
 // Handler

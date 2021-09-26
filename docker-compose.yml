@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: myPostgres
+    build: ./postgres
+    tty: true
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.200.2
+
+    ports:
+      - 5432:5432
+
+  golang-echo:
+    container_name: myEcho
+    build: ./echo
+    command: go run /go/src/echo/server.go
+    tty: true
+    ports: 
+      - 1323:1323
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.200.3
+
+    depends_on:
+      - postgres
+
+networks:
+  mynetwork:
+     driver: bridge
+     ipam:
+        driver: default
+        config:
+          - subnet: 192.168.200.0/24
+            gateway: 192.168.200.1
