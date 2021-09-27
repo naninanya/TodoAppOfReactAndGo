@@ -37,6 +37,7 @@ var (
 )
 
 func init() {
+	//todo Get conStr from the environment variables.
 	config, err := loadConfig()
 	if err != nil {
 		log.Fatal("Cannot exectute loadConfig.", err)

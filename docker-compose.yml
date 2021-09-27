@@ -1,19 +1,31 @@
-version: "3.8"
+version: "3"
 
 services:
-  postgres:
+  db:
     container_name: myPostgres
-    build: ./postgres
+    restart: always
+    image: postgres:13-alpine
+    hostname: dbServer
+    env_file:
+      - .env
+    # todo postgress trust -> md5
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     tty: true
     networks:
       mynetwork:
         ipv4_address: 192.168.200.2
-
     ports:
       - 5432:5432
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d/
 
-  golang-echo:
+  backend:
     container_name: myEcho
+    restart: always
+    hostname: backendServer
     build: ./echo
     command: go run /go/src/echo/server.go
     tty: true
@@ -22,9 +34,22 @@ services:
     networks:
       mynetwork:
         ipv4_address: 192.168.200.3
-
     depends_on:
-      - postgres
+      - db
+  
+  frontend:
+    container_name: myReact
+    hostname: frontendServer
+    build: ./client-app
+    command: npm start
+    tty: true
+    ports:
+      - 3000:3000
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.200.4
+    depends_on:
+      - backend
 
 networks:
   mynetwork:
