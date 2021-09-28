@@ -55,6 +55,20 @@ services:
         ipv4_address: 192.168.200.4
     depends_on:
       - backend
+  
+  web:
+    container_name: myNginx
+    hostname: webServer
+    build: ./nginx
+    tty: true
+    ports: 
+      - 1234:1234
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.200.5
+    depends_on:
+      - backend
+      - frontend
 
 networks:
   mynetwork:
