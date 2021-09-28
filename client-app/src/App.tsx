@@ -11,8 +11,7 @@ function App() {
   const [todoItemsData, setTodoItemsData] = useState<AllTodoItemsType>([]);
 
   useEffect(() => {
-    // If you want to check from iphone, you change localhost to your pc address.
-    const url = `http://localhost:1323/api/todo`;
+    const url = `/api/todo`;
     fetch(url, { mode: 'cors' })
       .then(res => res.json())
       .then(data => {

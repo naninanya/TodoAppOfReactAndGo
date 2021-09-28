@@ -10,7 +10,7 @@ const DeleteButton = ({ items, setItems }: AllItemsPropsType) => {
         if (completedItems.length === 0)
             return;
 
-        const url = `http://localhost:1323/api/delete`;
+        const url = `/api/delete`;
         const requestOption = {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
