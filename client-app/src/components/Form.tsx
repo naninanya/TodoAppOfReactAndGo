@@ -11,7 +11,7 @@ const Form = ({ items, setItems }: AllItemsPropsType) => {
             return
         }
 
-        const url = `http://localhost:1323/api/save/${todoName}`;
+        const url = `/api/save/${todoName}`;
         const requestOption = {
             method: "POST",
         };

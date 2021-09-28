@@ -2,11 +2,9 @@ package handler
 
 import (
 	"database/sql"
-	"encoding/json"
-	"log"
 	"net/http"
 	"os"
-	"todoApp/infrastructure"
+	"todoApp/echo/infrastructure"
 
 	_ "github.com/lib/pq"
 
@@ -14,35 +12,16 @@ import (
 	"github.com/pkg/errors"
 )
 
-type dbConfig struct {
-	DbDriver string `json:"dbDriver"`
-	Dsn      string `json:"dsn"`
-}
-
-func loadConfig() (*dbConfig, error) {
-	f, err := os.Open("./private/DBConfig.json")
-	if err != nil {
-		log.Fatal("loadConfig os.Open err", err)
-		return nil, err
-	}
-	defer f.Close()
-
-	var cfg dbConfig
-	err = json.NewDecoder(f).Decode(&cfg)
-	return &cfg, err
-}
-
-var (
-	Client *sql.DB
-)
+var Client *sql.DB
 
 func init() {
-	config, err := loadConfig()
-	if err != nil {
-		log.Fatal("Cannot exectute loadConfig.", err)
-	}
+	dbName := os.Getenv("POSTGRES_DB")
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dsn := "host=dbServer port=5432 user=" + dbUser + " password=" + dbPassword + " dbname=" + dbName + " sslmode=disable"
 
-	Client, err = sql.Open(config.DbDriver, config.Dsn)
+	var err error
+	Client, err = sql.Open("postgres", dsn)
 	if err != nil {
 		panic(err)
 	}

@@ -3,8 +3,8 @@ package infrastructure
 import (
 	"database/sql"
 	"strings"
-	"todoApp/domain"
-	"todoApp/domain/repository"
+	"todoApp/echo/domain"
+	"todoApp/echo/domain/repository"
 )
 
 type TodoItemPersistence struct{}
