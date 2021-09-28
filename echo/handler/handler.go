@@ -20,7 +20,8 @@ func init() {
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dsn := "host=dbServer port=5432 user=" + dbUser + " password=" + dbPassword + " dbname=" + dbName + " sslmode=disable"
 
-	Client, err := sql.Open("postgres", dsn)
+	var err error
+	Client, err = sql.Open("postgres", dsn)
 	if err != nil {
 		panic(err)
 	}
