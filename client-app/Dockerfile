@@ -5,4 +5,5 @@ FROM node:16-alpine
 RUN mkdir /usr/client-app
 WORKDIR /usr/client-app
 ADD . /usr/client-app
+RUN npm install
 # todo Get ddl from github.
