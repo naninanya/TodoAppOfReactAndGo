@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { AllItemsPropsType } from "../types";
 
 const TodoItems = ({ items, setItems }: AllItemsPropsType) => {
@@ -13,11 +14,12 @@ const TodoItems = ({ items, setItems }: AllItemsPropsType) => {
 
     return (
         <>
+            <br />
             {items.map((item) =>
-                <button className={!item.isCompleted ? "ItemButton" : "CompletedItemButton"}
+                <Button variant="outlined" color={!item.isCompleted ? "inherit" : "secondary"}
                     type="submit" onClick={setCompleted} id={item.Id.toString()} key={item.Id}>
                     {!item.isCompleted ? item.Name : item.Name + " Complete!"}
-                </button>
+                </Button>
             )}
         </>
     );

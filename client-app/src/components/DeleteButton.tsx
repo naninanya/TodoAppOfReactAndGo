@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from "react";
 import { AllItemsPropsType } from "../types";
 
@@ -34,10 +36,11 @@ const DeleteButton = ({ items, setItems }: AllItemsPropsType) => {
     }
 
     return (
-        <button className="DeleteButton"
+        <Button variant="contained" startIcon={<DeleteIcon />}
+            color="error"
             type="submit" onClick={RemoveCompletedItem}>
             Clear completed Todo items
-        </button>
+        </Button>
     );
 };
 
