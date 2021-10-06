@@ -1,3 +1,5 @@
+import { Button, TextField } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
 import { AllItemsPropsType, SingleTodoItemType } from "../types";
 
@@ -30,17 +32,20 @@ const Form = ({ items, setItems }: AllItemsPropsType) => {
                 alert("Error occurred. " + err);
                 console.log(err);
             })
-            
+
         setTodoName("");
     }
 
     return (
         <>
             <form onSubmit={addTodoItem}>
-                <input className="AddTodoInput" type="text" name="todoItem" placeholder="todo..."
+                <br />
+                <TextField label="TODO" variant="standard"
+                    type="text" name="todoItem"
                     onChange={e => setTodoName(e.target.value)} value={todoName} />
                 <br />
-                <button className="AddTodoButton" type="submit">Add</button>
+                <br />
+                <Button variant="contained" endIcon={<SendIcon />} type="submit">Add</Button>
             </form>
         </>
     );
