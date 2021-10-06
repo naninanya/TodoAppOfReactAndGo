@@ -5,7 +5,7 @@ This application can mange your todo task.
 
 # DEMO
 
-![demo image](https://user-images.githubusercontent.com/57711328/135458971-77fcbb98-fcaf-43bc-9ae1-d1196ddff035.png)
+![demo image](https://user-images.githubusercontent.com/57711328/136161475-15472658-3273-4653-a53b-d450ce62a300.png)
 
 # Requirement
 
