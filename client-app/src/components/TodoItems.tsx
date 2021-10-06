@@ -15,8 +15,10 @@ const TodoItems = ({ items, setItems }: AllItemsPropsType) => {
     return (
         <>
             <br />
+            <br />
             {items.map((item) =>
-                <Button variant="outlined" color={!item.isCompleted ? "inherit" : "secondary"}
+                <Button className="ItemButton" variant="outlined"
+                    color={!item.isCompleted ? "success" : "secondary"}
                     type="submit" onClick={setCompleted} id={item.Id.toString()} key={item.Id}>
                     {!item.isCompleted ? item.Name : item.Name + " Complete!"}
                 </Button>
